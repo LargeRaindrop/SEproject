@@ -1,11 +1,9 @@
 <template>
   <div id="app">
-    <!--
     <div id="nav">
-      <router-link to="/">Home</router-link>
+      <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    -->
     <router-view/>
   </div>
 </template>
@@ -16,14 +14,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #000000;
-  height: 600px;
-  background-image: url('./assets/flying house.jpg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 100%;
-  opacity:0.8;
+  color: #2c3e50;
 }
 
 #nav {

@@ -2,17 +2,6 @@
 
 <template>
 <div>
-    <Navigator return="false"/>
+<p>About</p>
 </div>
-
 </template>
-
-<script>
-import Navigator from '../components/Navigator.vue'
-export default {
-  name: 'About',
-  components: {
-    Navigator
-  }
-}
-</script>

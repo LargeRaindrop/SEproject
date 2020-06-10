@@ -1,13 +1,8 @@
 // Home.vue
-// https://element.eleme.cn/#/zh-CN/component/layout
+
 <template>
 <div>
-    <Navigator return="false"/>
-    <div style="margin-top: 15px;">
-      <el-input placeholder="请输入内容" v-model="inputCon" class="input-with-select">
-        <el-button slot="append" icon="el-icon-search" @click="testCon"></el-button>
-      </el-input>
-    </div>
+    <p>Home page</p>
     <p>Random number from backend: {{ randomNumber }}</p>
     <button @click="getRandom">New random number</button>
 </div>
@@ -16,18 +11,13 @@
 <script>
 // axios库 允许我们用响应HTTP请求并用Json返回JavaScript Promise
 import axios from 'axios'
-// @ is an alias to /src
-import Navigator from '../components/Navigator.vue'
 export default {
-  name: 'Home',
-  components: {
-    Navigator
-  },
   data () {
     return {
       randomNumber: 0
     }
   },
+
   methods: {
     getRandomInt (min, max) {
       min = Math.ceil(min)
@@ -48,6 +38,7 @@ export default {
       })
     }
   },
+
   created () {
     this.getRandom()
   }
