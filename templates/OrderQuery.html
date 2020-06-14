@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>梦想家——我的订单</title>
+<style>
+	* {
+		margin:0;
+		padding:0;
+	}
+	body {
+		background: rgba(255,255,255,1) url("{{url_for('static', filename='image/flying house-30%.jpg')}}") no-repeat scroll top center;
+		background-size: cover;
+	}
+	.nav {
+		height: 60px;
+		background: rgba(155,224,243,0.65);
+		text-align: right;
+	}
+	.nav > .button{
+		border: 0;
+		text-decoration: none;
+		color:#fff;
+		height: 60px;
+		line-height: 60px;
+		text-align: center;
+		background: rgba(66,181,213,0.65);
+		padding:0 15px;
+		float:right;
+		font-size: 16px;
+	}
+	.nav > .button:hover{
+		background: rgba(29,136,165,0.65);
+	}
+
+	.nav > .logo {
+		position:absolute;
+		left:40px;
+	}
+	#logo {
+		background-color: none;
+		width: 60px;
+		height: 60px;
+	}
+
+	.big {
+		background: rgba(255,255,255,0.5);
+		width: 80%;
+		padding: 10px center;
+		margin:30px auto;
+		border-radius: 15px;
+	}
+
+	.order {
+		background: rgba(255,255,255,0.7);
+		width: 80%;
+		height: 150px;
+		margin: 15px auto 15px;
+		border-radius: 15px;
+		position:relative;
+		/* line-height: 150px;
+		text-align: center; */
+		color:#1d839f;
+	}
+	.none {
+		background: rgba(255,255,255,0.7);
+		width: 80%;
+		height: 150px;
+		margin: 15px auto 15px;
+		border-radius: 15px;
+		position:relative;
+		line-height: 150px;
+		text-align: center;
+		color:#1d839f;
+	}
+
+	.order a {
+		position:absolute;	
+		height: 45px;
+		width: 120px;
+		line-height: 45px;
+		color: #8a8a8a;
+	}
+	.order table {
+		position:relative;
+		height:150px;
+		margin: 0 30px
+	}
+	.order .shortpay{
+		color: #ff6347;
+		top:43px;
+		right:150px;
+	}
+	.order .lefttd {
+		width: 640px;
+		font-size: 23px;
+		font-weight: bold;
+	}
+	.order .pay {
+		color: #ff6347;
+		top: 7px;
+		right:155px;
+	}
+	.order .contr {
+		color: #ff6347;
+		bottom: 60px;
+		right:150px;
+	}
+	.order .prolong {
+		color: #ff6347;
+		bottom: 20px;
+		right:150px;
+	}
+	.fix {
+		top:25px;
+		right:30px;
+	}
+	.ts {
+		bottom: 35px;
+		right: 30px;
+	}
+	.iconSmall{
+		position: relative;
+		width: 40px;
+		height: 40px;
+		top: 13px;
+	}
+	.iconBig{
+		position: relative;
+		width: 30px;
+		height: 30px;
+		top: 10px;
+	}
+	.un {
+		color: gray;
+		font-size:20px;
+		position:absolute;
+		top:40%;
+		right:5%;
+	}
+</style>
+</head>
+
+<body id="bg">
+	<div class="nav">
+		<a href="{{url_for('userhome',userID=userID)}}" class="logo">
+				<img src="{{url_for('static',filename='image/logo-small.png')}}" alt="" id="logo">
+		</a>
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('changeinfo',userID=userID)}}" class="button">账号管理</a>
+		<a href="{{url_for('orderquery',userID=userID)}}" class="button">我的订单</a>
+		<a href="{{url_for('msgbox',userID=userID)}}" class="button">消息盒子</a>
+	</div>
+	{% if ret | length == 0 %}
+		<div class="none">
+			<p>您暂时还没有自己的梦想家哦,快去申请一个吧!</p>
+		</div>
+		{% else %}
+			{% for r in ret %}
+				<div class="order">
+					<table>
+						<tr>
+							<td class="lefttd">{{searchRoomByID(r.roomID).roomName}}</td>
+						</tr>
+						<tr>
+							<td>起租日期:{{r.startdate}}</td>
+						</tr>
+						<tr>
+							<td>截租日期:{{r.enddate}}</td>
+							<td></td>
+						</tr>
+						<tr>
+							{% if r.isLongRent == True %}
+								<td>租期类型:长租</td>
+							{% else %}
+								<td>租期类型:短租</td>
+							{% endif %}
+							<td></td>
+						</tr>
+					</table>
+					{% if r.isagreed == 0%}
+						<p class="un">待 审 核</p>
+					{% else %}
+						{% if r.isLongRent == True %}
+							<a href="/pay/{{userID}}" class="pay">
+								<img src="{{url_for('static',filename='icon/支付.png')}}" alt="" class="iconSmall">
+								缴费
+							</a>
+							<a href="/contract/{{userID}}" class="contr">
+								<img src="{{url_for('static',filename='icon/合同.png')}}" alt="" class="iconBig">
+								合同
+							</a>
+							<a href="/prolong/{{userID}}/{{r.roomID}}" class="prolong">
+								<img src="{{url_for('static',filename='icon/service-延长保修.png')}}" alt="" class="iconBig">
+								续约
+							</a>
+						{% else %}
+							{% if r.ispayed == True %}
+								<a href="#" class="shortpay" href ="javascript:return false;" style="opacity:0.2">
+									<img src="{{url_for('static',filename='icon/支付.png')}}" alt="" class="iconSmall">
+									已支付
+								</a>
+							{% else %}
+								<a href="/pay/{{userID}}" class="shortpay">
+									<img src="{{url_for('static',filename='icon/支付.png')}}" alt="" class="iconSmall">
+									支付
+								</a>
+							{% endif %}
+						{% endif %}
+								{% if searchRepairByID(r.tenantID, r.roomID) | length == 0 %}
+									<a href="/fix/{{userID}}/{{r.roomID}}" class="fix">
+										<img src="{{url_for('static',filename='icon/报修.png')}}" alt="" class="iconBig">
+										我要报修
+									</a>
+								{% elif searchRepairByID(r.tenantID, r.roomID).ishandled == False %}
+									<a href="/fix/{{userID}}/{{r.roomID}}" class="fix">
+										<img src="{{url_for('static',filename='icon/报修.png')}}" alt="" class="iconBig">
+										我要报修
+									</a>
+								{% else %}
+									<a href="/valuefix/{{userID}}/{{r.roomID}}" class="fix">
+										<img src="{{url_for('static',filename='icon/报修.png')}}" alt="" class="iconBig">
+										评价师傅
+									</a>
+								{% endif %}
+							<a href="/complanation/{{userID}}/{{r.roomID}}" class="ts">
+								<img src="{{url_for('static',filename='icon/投诉.png')}}" alt="" class="iconBig">
+								我要投诉
+							</a>
+					{% endif %}
+					
+				</div>
+			{% endfor %}
+		{% endif %}
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>梦想家——报修</title>
+
+	<style>
+	* {
+		margin:0;
+		padding:0;
+	}
+	body {
+		background: rgba(255,255,255,1) url("{{url_for('static', filename='image/flying house-30%.jpg')}}") no-repeat scroll top center;
+		background-size: cover;
+	}
+		.nav {
+		height: 60px;
+		background: rgba(155,224,243,0.65);
+		text-align: right;
+	}
+	.nav > .button{
+		border: 0;
+		text-decoration: none;
+		color:#fff;
+		height: 60px;
+		line-height: 60px;
+		text-align: center;
+		background: rgba(66,181,213,0.65);
+		padding:0 15px;
+		float:right;
+		font-size: 16px;
+	}
+	.nav > .button:hover{
+		background: rgba(29,136,165,0.65);
+	}
+
+	.nav > .logo {
+		position:absolute;
+		left:40px;
+	}
+	#logo {
+		background-color: none;
+		width: 60px;
+		height: 60px;
+	}
+	.struc {
+		background: rgba(255,255,255,0.65);
+		width: 80%;
+		padding: 20px 0;
+		margin: 30px auto;
+		border-radius: 20px;
+	}
+	table {
+		margin: 50px auto;
+	}
+	table tr {
+		height: 50px;
+	}
+	table .ta {
+		height: 30px;
+		width: 200px;
+		border-radius: 15px;
+	}
+	table th {
+		color:#195e99;
+		font-size:35px;
+		height: 60px;
+	}
+
+	td {
+		color:#195e99;
+	}
+	
+	#submit {
+		height: 35px;
+		width: 120px;
+		color: #fff;
+		text-align: center;
+		font-size: 16px;
+		line-height: 30px;
+		background-color: #42b5d5;
+		border-radius: 10px;
+	}
+
+	.appen {
+		font-size: 12px;
+		color: #1d88a5;
+	}
+
+	textarea {
+		border-radius: 15px;
+	}
+	</style>
+
+</head>
+<body>
+	<div class="nav">
+		<a href="{{url_for('userhome',userID=userID)}}" class="logo">
+				<img src="{{url_for('static',filename='image/logo-small.png')}}" alt="" id="logo">
+		</a>
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('changeinfo',userID=userID)}}" class="button">账号管理</a>
+		<a href="{{url_for('orderquery',userID=userID)}}" class="button">我的订单</a>
+		<a href="{{url_for('msgbox',userID=userID)}}" class="button">消息盒子</a>
+	</div>
+	<div class="struc">
+		<form action="{{url_for('f_fix',userID=userID,roomID=roomID)}}" method="post" onSubmit="return check()">
+			<table>
+				<th colspan="2">报 修</th>
+				<tr>
+					<td>具体报修内容：</td>
+					<td><textarea name="reason" id="rs" cols="29" rows="10"></textarea></td>
+				</tr>
+				<tr>
+					<th colspan="2" style="height: 70px"><input type="submit" value="提交报修申请" id="submit"></th>
+				</tr>
+			</table>
+		</form>
+    </div>
+    {% if msg %}
+        <script>alert("提交报修申请成功!请等待客服为您安排维修人员");</script>
+    {% elif error %}
+        <script>alert("您还有没处理完毕的报修哦,请等待处理完毕后再进行下一次报修!");</script>
+    {% endif %}
+</body>
+</html>
+<script type="text/javascript">
+	function check(){
+        var p2=document.getElementById('rs');
+		if (p2.value==''){
+			alert("报修内容不能为空!");
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	</script>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>梦想家——评价</title>
+
+	<style>
+	* {
+		margin:0;
+		padding:0;
+	}
+	body {
+		background: rgba(255,255,255,1) url("{{url_for('static', filename='image/flying house-30%.jpg')}}") no-repeat scroll top center;
+		background-size: cover;
+	}
+		.nav {
+		height: 60px;
+		background: rgba(155,224,243,0.65);
+		text-align: right;
+	}
+	.nav > .button{
+		border: 0;
+		text-decoration: none;
+		color:#fff;
+		height: 60px;
+		line-height: 60px;
+		text-align: center;
+		background: rgba(66,181,213,0.65);
+		padding:0 15px;
+		float:right;
+		font-size: 16px;
+	}
+	.nav > .button:hover{
+		background: rgba(29,136,165,0.65);
+	}
+
+	.nav > .logo {
+		position:absolute;
+		left:40px;
+	}
+	#logo {
+		background-color: none;
+		width: 60px;
+		height: 60px;
+	}
+	.struc {
+		background: rgba(255,255,255,0.65);
+		width: 80%;
+		padding: 20px 0;
+		margin: 30px auto;
+		border-radius: 20px;
+	}
+	table {
+		margin: 50px auto;
+	}
+	table tr {
+		height: 50px;
+	}
+	table .ta {
+		height: 30px;
+		width: 200px;
+		border-radius: 15px;
+	}
+	table th {
+		color:#195e99;
+		font-size:35px;
+		height: 60px;
+	}
+
+	td {
+		color:#195e99;
+	}
+	
+	#submit {
+		height: 35px;
+		width: 120px;
+		color: #fff;
+		text-align: center;
+		font-size: 20px;
+		line-height: 30px;
+		background-color: #42b5d5;
+		border-radius: 10px;
+	}
+
+	.appen {
+		font-size: 12px;
+		color: #1d88a5;
+	}
+
+	textarea {
+		border-radius: 15px;
+	}
+	</style>
+
+</head>
+<body>
+	<div class="nav">
+		<a href="{{url_for('userhome',userID=userID)}}" class="logo">
+				<img src="{{url_for('static',filename='image/logo-small.png')}}" alt="" id="logo">
+		</a>
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('changeinfo',userID=userID)}}" class="button">账号管理</a>
+		<a href="{{url_for('orderquery',userID=userID)}}" class="button">我的订单</a>
+		<a href="{{url_for('msgbox',userID=userID)}}" class="button">消息盒子</a>
+	</div>
+	<div class="struc">
+		<form action="{{url_for('f_valuefix',userID=userID,roomID=roomID)}}" method="post">
+			<table>
+				<th colspan="2">评分</th>
+				<tr>
+					<td>请给为您服务的师傅评分:</td>
+					<td><select name="score" id="score">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="7">7</option>
+                        <option value="9">9</option>
+                        <option value="10" selected="selected">10</option>
+                    </select></td>
+				</tr>
+				<tr>
+					<th colspan="2" style="height: 70px"><input type="submit" value="提交评分" id="submit"></th>
+				</tr>
+			</table>
+		</form>
+    </div>
+    {% if msg %}
+        <script>alert("提交评价成功!");</script>
+    {% endif %}
+</body>
+</html>

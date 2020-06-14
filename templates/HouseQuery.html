@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>梦想家——搜索结果</title>
+<style>
+	* {
+		margin:0;
+		padding:0;
+	}
+	body {
+		background: rgba(255,255,255,1) url("{{url_for('static', filename='image/flying house-30%.jpg')}}") no-repeat scroll top center;
+		background-size: cover;
+	}
+	.nav {
+		height: 60px;
+		background: rgba(155,224,243,0.65);
+		text-align: right;
+	}
+	.nav > .button{
+		border: 0;
+		text-decoration: none;
+		color:#fff;
+		height: 60px;
+		line-height: 60px;
+		text-align: center;
+		background: rgba(66,181,213,0.65);
+		padding:0 15px;
+		float:right;
+		font-size: 16px;
+	}
+	.nav > .button:hover{
+		background: rgba(29,136,165,0.65);
+	}
+
+	.nav > .logo {
+		position:absolute;
+		left:40px;
+	}
+	#logo {
+		background-color: none;
+		width: 60px;
+		height: 60px;
+	}
+
+	.big {
+		background: rgba(255,255,255,0.5);
+		width: 80%;
+		padding: 10px center;
+		margin:30px auto;
+		border-radius: 15px;
+	}
+
+	.order {
+		background: rgba(255,255,255,0.7);
+		width: 80%;
+		height: 150px;
+		margin: 15px auto 15px;
+		border-radius: 15px;
+		position:relative;
+		/* line-height: 150px;
+		text-align: center; */
+		color:#1d839f;
+	}
+
+	.none {
+		background: rgba(255,255,255,0.7);
+		width: 80%;
+		height: 150px;
+		margin: 15px auto 15px;
+		border-radius: 15px;
+		position:relative;
+		line-height: 150px;
+		text-align: center;
+		color:#1d839f;
+	}
+
+	.order table {
+		position:relative;
+		height:150px;
+		margin: 0 30px
+	}
+	.order table tr{
+		height: 20px;
+	}
+	.order .lefttd {
+		width: 640px;
+		font-size: 23px;
+		font-weight: bold;
+	}
+	.order .price {
+		font-size: 35px;
+		font-weight: bolder;
+		color: #ff6347;
+	}
+	.order a {
+		position:absolute;	
+		height: 45px;
+		width: 120px;
+		line-height: 45px;
+		color: #8a8a8a;
+	}
+	.order .apply{
+		color: #ff6347;
+		top:50px;
+		right:45px;
+	}
+	.iconSmall{
+		position: relative;
+		width: 30px;
+		height: 30px;
+		top: 10px;
+	}
+
+</style>
+</head>
+
+<body id="bg">
+	<div class="nav">
+		<a href="{{url_for('userhome',userID=userID)}}" class="logo">
+				<img src="{{url_for('static',filename='image/logo-small.png')}}" alt="" id="logo">
+		</a>
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('changeinfo',userID=userID)}}" class="button">账号管理</a>
+		<a href="{{url_for('orderquery',userID=userID)}}" class="button">我的订单</a>
+		<a href="{{url_for('msgbox',userID=userID)}}" class="button">消息盒子</a>
+	</div>
+		{% if ret | length == 0 %}
+		<div class="none">
+			<p>啊哦,没有找到合适的房源呢,换个关键词试试吧</p>
+		</div>
+		{% else %}
+			{% for r in ret %}
+				<div class="order">
+					<table>
+						<tr>
+							<td class="lefttd">{{ret[loop.index0].roomName}}</td>
+							{% if r.isLongRent == True %}
+								<td rowspan="5" class="price">￥{{r.rentmoney}}/月</td>
+							{% else %}
+								<td rowspan="5" class="price">￥{{r.rentmoney}}/天</td>
+							{% endif %}
+						</tr>
+						<tr>
+							<td>房源类型:{{r.capacity}}人间</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>剩余床位:{{r.available}}</td>
+							<td></td>
+						</tr>
+						<tr>
+							{% if r.isLongRent == True %}
+								<td>租期类型:长租</td>
+							{% else %}
+								<td>租期类型:短租</td>
+							{% endif %}
+							<td></td>
+						</tr>
+						<tr>
+							<td>房屋描述:{{r.description}}</td>
+							<td></td>
+						</tr>
+					</table>
+					<a href="/applyform/{{userID}}/{{r.roomID}}" class="apply">
+						<img src="{{url_for('static',filename='icon/申请-橘色.png')}}" alt="" class="iconSmall">
+						我要申请
+					</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+
+
+</body>
+</html>

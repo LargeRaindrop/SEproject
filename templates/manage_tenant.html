@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>租客管理界面</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+               function getInfo(){
+            var name = document.getElementById("uid1");
+            alert("输入的ID是：" + name);
+            return true;
+        }
+        .nav {
+		height: 60px;
+		background: rgba(0, 0, 0, 0.4);
+		text-align: right;
+        }
+        .nav > .button{
+            border: 0;
+            text-decoration: none;
+            color:#fff;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.60);
+            padding:0 15px;
+            float:right;
+            font-size: 16px;
+
+        }
+        .nav > .button:hover{
+            background: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+
+</head>
+<body id="bg">
+    <div class="nav">
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('f_adminhome',userID=userID)}}" class="button">返回主页</a>
+	</div>
+<div class="container">
+    <br><br><br>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="jumbotron touming">
+                <h1>管理员您好！<br><br>欢迎来到<br><br>租客管理界面！<br><br></h1>
+                <p>每天都要有好心情哦&emsp;&emsp;\(￣︶￣*\))</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 管理租客信息</h2>
+            <br>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <br>
+        <div class="col-md-8 col-md-offset-1">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="关键字搜索...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">搜索</button>
+                </span>
+            </div><!-- /input-group -->
+        </div>
+
+        <div class="col-md-1">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" >新增信息</button>
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">添加租客</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/managetenant" method="post" onsubmit="check()">
+                            <div class="row">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">用户名</span>
+                                    <input type="text" name="tenantName" class="form-control" placeholder="请输入用户名" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon2">用户密码</span>
+                                    <input type="password" name="password" class="form-control" placeholder="请设置密码" aria-describedby="basic-addon2">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon3">用户电话</span>
+                                    <input type="text" name="phoneNumber" class="form-control" placeholder="请输入用户电话" aria-describedby="basic-addon3">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon4">用户性别</span>
+                                    <label>男<input type="radio" value="1" name="sex" checked="checked"></label><label>女<input type="radio" value="0" name="sex"></label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon5">用户年龄</span>
+                                    <select name="age" id="age">
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                        <option value="32">32</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon6">用户职业</span>
+                                    <input type="text" name="job" class="form-control" placeholder="请输入用户职业" aria-describedby="basic-addon5">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon7">用户所在城市</span>
+                                    <select name="city" id="city">
+                                        <option value="beijing">北京</option>
+                                        <option value="shanghai">上海</option>
+                                        <option value="guangzhou">广州</option>
+                                        <option value="shenzhen">深圳</option>
+                                        <option value="hangzhou">杭州</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>                    
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-success" value="保存" id="submit">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <br><br>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="bs-example" data-example-id="striped-table">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>用户名</th>
+                        <th>性别</th>
+                        <th>电话</th>
+                        <th>年龄</th>
+                        <th>城市</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    {% for item in tenant %}
+                    <tbody>
+                    <tr>
+                        <th scope="row">{{loop.index}}</th>
+                        <td>{{item.tenantName}}</td>
+                        <td>{% if item.isMale == 1 %}男{% else %}女{% endif %}</td>
+                        <td>{{item.phoneNumber}}</td>
+                        <td>{{item.age}}</td>
+                        <td>{{item.city}}</td>
+                        <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2" >查看详细信息</button></td>
+                    </tr>
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel2">修改租客信息</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/managetenant" method="post">
+                                    <div class="row">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1">用户名</span>
+                                            <input type="text" name="tenantName" class="form-control" value="{{item.tenantName}}" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon2">用户密码</span>
+                                            <input type="password" name="password" class="form-control" value="{{item.password}}" aria-describedby="basic-addon2">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon3">用户电话</span>
+                                            <input type="text" name="phoneNumber" class="form-control" value="{{item.phoneNumber}}" aria-describedby="basic-addon3">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon4">用户性别</span>
+                                            <label>男<input type="radio" value="1" name="sex" checked="checked"></label><label>女<input type="radio" value="0" name="sex"></label>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon5">用户年龄</span>
+                                            <select name="age" id="age">
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
+                                                <option value="25">25</option>
+                                                <option value="26">26</option>
+                                                <option value="27">27</option>
+                                                <option value="28">28</option>
+                                                <option value="29">29</option>
+                                                <option value="30">30</option>
+                                                <option value="31">31</option>
+                                                <option value="32">32</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon6">用户职业</span>
+                                            <input type="text" name="job" class="form-control" value="{{item.job}}" aria-describedby="basic-addon5">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon7">用户所在城市</span>
+                                            <select name="city" id="city">
+                                                <option value="beijing">北京</option>
+                                                <option value="shanghai">上海</option>
+                                                <option value="guangzhou">广州</option>
+                                                <option value="shenzhen">深圳</option>
+                                                <option value="hangzhou">杭州</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn btn-success"value="修改信息" id="submit">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <br>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="row">
+                <br><hr class="line-one"><br>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="bs-docs-header" id="content" tabindex="-1">
+    <br><br>
+    <div class="container">
+        <h3 style="text-align:center">到底啦&emsp;&emsp;~(￣▽￣)~*</h3>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+<style>
+    .line-one {/*透明渐变水平线*/
+        width:80%;
+        margin:0 auto;
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    }
+    #bg {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: #000000;
+        height: 608px;
+        background-image: url_for('static',filename='image/flying house.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        opacity:1.0;
+        margin: 0;
+        padding: 0;
+    }
+    .touming{
+        background-color:rgba(0,0,0,0)
+    }
+    .navbarbg{
+        background-color: #7abaff;
+    }
+</style>
+<script>
+function check(){
+    ;
+}
+</script>

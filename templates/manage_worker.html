@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>管理师傅</title>
+    <style>
+                .nav {
+		height: 60px;
+		background: rgba(0, 0, 0, 0.4);
+		text-align: right;
+        }
+        .nav > .button{
+            border: 0;
+            text-decoration: none;
+            color:#fff;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.60);
+            padding:0 15px;
+            float:right;
+            font-size: 16px;
+
+        }
+        .nav > .button:hover{
+            background: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('f_adminhome',userID=userID)}}" class="button">返回主页</a>
+	</div>
+    <div class="container">
+        <br><br><br>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="jumbotron touming">
+                    <h1>管理员您好！<br><br>欢迎来到<br><br>师傅管理界面！<br><br></h1>
+                    <p>每天都要有好心情哦&emsp;&emsp;\(￣︶￣*\))</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br><br>
+
+    {% for item in worker %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+            师傅ID：{{item.repairmanID}}
+        </div>
+    </div>
+    {% endfor %}
+    <br><br>
+    <form action="/manageworker" pethod='post'>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-4">
+                <input type="text" class="form-control" name="password" value="password" placeholder="请设置密码，默认为password">
+            </div>
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-success" value="添加师傅">
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+<style>
+    .touming{
+        background-color:rgba(0,0,0,0)
+    }
+</style>

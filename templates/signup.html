@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>梦想家——注册</title>
+
+	<style>
+	* {
+		margin:0;
+		padding:0;
+	}
+	body {
+		background: rgba(255,255,255,1) url("{{url_for('static', filename='image/flying house-30%.jpg')}}") no-repeat scroll top center;
+		background-size: cover;
+	}
+	.struc {
+		background: rgba(255,255,255,0.65);
+		width: 80%;
+		padding: 20px 0;
+		margin: 30px auto;
+		border-radius: 20px;
+	}
+	table {
+		margin: 50px auto;
+	}
+	table tr {
+		height: 50px;
+	}
+	table .ta {
+		height: 30px;
+		width: 300px;
+		border-radius: 15px;
+	}
+	table th {
+		color:#195e99;
+		font-size:35px;
+		height: 60px;
+	}
+
+	td {
+		color:#195e99;
+	}
+	
+	#submit {
+		height: 35px;
+		width: 120px;
+		color: #fff;
+		text-align: center;
+		font-size: 20px;
+		line-height: 30px;
+		background-color: #42b5d5;
+		border-radius: 10px;
+	}
+
+	.appen {
+		font-size: 12px;
+		color: #1d88a5;
+	}
+	a {
+		color:#195e99;
+		font-size: 12px;
+	}
+	</style>
+
+</head>
+<body>
+	<div class="struc">
+		
+			<table>
+				<th colspan="2">注    册</th>
+				<tr>
+					<form action="/submitphone" method="post">
+						<td>手机号码:<span style="color:red">*</span></td>
+						<td><input type="text" class="ta" name="phone" id="phone" value="{{phone}}" placeholder="请输入手机号"></td>
+						<td><input type="submit" value="获取验证码"></td>
+					</form>
+				</tr>
+				<form action="/register" method="post" onSubmit="return check()">
+				<tr>
+					<td>验证码:<span style="color:red">*</span></td>
+					<td colspan="2"><input type="text" class="ta" name="code" id="code" placeholder="请输入验证码"></td>
+				</tr>
+				<tr>
+					<td>用户名：<span style="color:red">*</span></td>
+					<td colspan="2"><input type="text" name="username" class="ta" id="n1" placeholder="请输入用户名"></td>
+				</tr>
+				<tr>
+					<td>密码：<span style="color:red">*</span></td>
+					<td colspan="2"><input type="password" name="password1" class="ta" id="pwd1" placeholder="密码由数字-字母或下划线组成，长度超过6位"></td>
+				</tr>
+				<tr>
+					<td>确认密码：<span style="color:red">*</span></td>
+					<td colspan="2"><input type="password" name="password2" class="ta" id="pwd2" placeholder="请再次输入密码"></td>
+				</tr>
+				<tr>
+					<td>性别：<span style="color:red">*</span></td>
+					<td colspan="2"><label>男<input type="radio" value="1" name="sex" checked="checked"></label><label>女<input type="radio" value="0" name="sex"></label></td>
+				</tr>
+				<tr>
+					<td>年龄:<span style="color:red">*</span></td>
+					<td colspan="2"><select name="age" id="age">
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+						<option value="32">32</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>职业:<span style="color:red">*</span></td>
+					<td colspan="2"><input type="text" class="ta" name="job" id="career" placeholder="请输入您的职业"></td>
+				</tr>
+				<tr>
+					<td>现居城市：<span style="color:red">*</span></td>
+					<td colspan="2"><select name="city" id="city">
+						<option value="beijing">北京</option>
+						<option value="shanghai">上海</option>
+						<option value="guangzhou">广州</option>
+						<option value="shenzhen">深圳</option>
+						<option value="hangzhou">杭州</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td colspan="3" class="appen">（其它城市的梦想家还在建设中哦）</td>
+				</tr>
+				<tr>
+					<input type="hidden" style="height: 20px" class="ta" name="okphone" id="okphone" value="{{phone}}">
+				</tr>
+				<tr>
+					<th colspan="3" style="height: 70px"><input type="submit" value="提交注册" id="submit"></th>
+				</tr>
+				<tr>
+					<th colspan="3" style="height: 16px">
+							<a href="{{url_for('home')}}">已经有账号了?去登录</a>
+					</th>
+				</tr>
+			</table>
+		</form>
+	</div>
+	{% if userID %}
+		<script>alert("注册成功！您的ID为：" + "{{userID}}"+"。以后请用ID和密码进行登录。");</script>
+	{% endif %}
+</body>
+</html>
+<script type="text/javascript">
+function check(){
+	var code = document.getElementById('code');
+	var na = document.getElementById('n1');
+	var gz = /^[_0-9a-zA-Z]{7,20}$/;
+	var p1 = document.getElementById('pwd1');
+	var p2 = document.getElementById('pwd2');
+	var ph = document.getElementById('okphone');
+	var ca = document.getElementById('career');
+	var stcode = '{{ret}}';
+	if (code.value.length == 0){
+		alert("验证码不能为空！");
+		return false;
+	}
+	else if(code.value != stcode ){
+		alert("验证码错误!");
+		return false;
+	}
+	else if (na.value.length == 0){
+		alert("用户名不能为空！");
+		return false;
+	}
+	else if (p1.value.length == 0){
+		alert("密码不能为空！");
+		return false;
+	}
+	else if (p1.value.length <= 6){
+		alert("密码长度太短！");
+		return false;
+	}
+	else if (!(p1.value == p2.value)){
+		alert("两次密码不一致！");
+		return false;
+	}
+	else if (ph.value.length == 0){
+		alert("手机号不能为空！");
+		return false;
+	}
+	else if (ca.value.length == 0){
+		alert("职业不能为空！");
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+</script>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>处理投诉</title>
+    <style>
+                .nav {
+		height: 60px;
+		background: rgba(0, 0, 0, 0.4);
+		text-align: right;
+        }
+        .nav > .button{
+            border: 0;
+            text-decoration: none;
+            color:#fff;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.60);
+            padding:0 15px;
+            float:right;
+            font-size: 16px;
+
+        }
+        .nav > .button:hover{
+            background: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body id="bg">
+    <div class="nav">
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('f_adminhome',userID=userID)}}" class="button">返回主页</a>
+	</div>
+<div class="container">
+    <br><br><br>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="jumbotron touming">
+                <h1>管理员您好！<br><br>欢迎来到<br><br>处理投诉界面！<br><br></h1>
+                <p>每天都要有好心情哦&emsp;&emsp;\(￣︶￣*\))</p>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br>
+    {% for item in complain %}
+        <div class="row">
+            <div class="col-md-2 col-md-offset-2">投诉内容：{{item.content}}</div>
+            <form action="/reply/{{item.tenantID}}/{{item.roomID}}/{{item.serverID}}" method="post">
+                <div class="col-md-4">
+                    <input type="textarea" name="reply" placeholder="请输入回复内容(不得大于300字)">
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="回复">
+                </div>
+            </form>
+        </div>
+        <br><br>
+    {% endfor %}
+</body>
+</html>
+<style>
+#bg {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #000000;
+    height: 608px;
+    background-image: url_for('static',filename='image/flying house.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    opacity:1.0;
+    margin: 0;
+    padding: 0;
+}
+.touming{
+    background-color:rgba(0,0,0,0)
+}
+</style>

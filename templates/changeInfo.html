@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>梦想家——修改信息</title>
+
+	<style>
+	* {
+		margin:0;
+		padding:0;
+	}
+	body {
+		background: rgba(255,255,255,1) url("{{url_for('static', filename='image/flying house-30%.jpg')}}") no-repeat scroll top center;
+		background-size: cover;
+	}
+		.nav {
+		height: 60px;
+		background: rgba(155,224,243,0.65);
+		text-align: right;
+	}
+	.nav > .button{
+		border: 0;
+		text-decoration: none;
+		color:#fff;
+		height: 60px;
+		line-height: 60px;
+		text-align: center;
+		background: rgba(66,181,213,0.65);
+		padding:0 15px;
+		float:right;
+		font-size: 16px;
+	}
+	.nav > .button:hover{
+		background: rgba(29,136,165,0.65);
+	}
+
+	.nav > .logo {
+		position:absolute;
+		left:40px;
+	}
+	#logo {
+		background-color: none;
+		width: 60px;
+		height: 60px;
+	}
+	.struc {
+		background: rgba(255,255,255,0.65);
+		width: 80%;
+		padding: 20px 0;
+		margin: 30px auto;
+		border-radius: 20px;
+	}
+	table {
+		margin: 50px auto;
+	}
+	table tr {
+		height: 50px;
+	}
+	table .ta {
+		height: 30px;
+		width: 300px;
+		border-radius: 15px;
+	}
+	table th {
+		color:#195e99;
+		font-size:35px;
+		height: 60px;
+	}
+
+	td {
+		color:#195e99;
+	}
+	
+	#submit {
+		height: 35px;
+		width: 120px;
+		color: #fff;
+		text-align: center;
+		font-size: 20px;
+		line-height: 30px;
+		background-color: #42b5d5;
+		border-radius: 10px;
+	}
+
+	.appen {
+		font-size: 12px;
+		color: #1d88a5;
+	}
+	</style>
+
+</head>
+<body>
+	<div class="nav">
+		<a href="{{url_for('userhome',userID=userID)}}" class="logo">
+				<img src="{{url_for('static',filename='image/logo-small.png')}}" alt="" id="logo">
+		</a>
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('changeinfo',userID=userID)}}" class="button">账号管理</a>
+		<a href="{{url_for('orderquery',userID=userID)}}" class="button">我的订单</a>
+		<a href="{{url_for('msgbox',userID=userID)}}" class="button">消息盒子</a>
+	</div>
+	<div class="struc">
+		<form action="{{url_for('f_changeinfo',userID=userID)}}" method="post" onSubmit="return check()">
+			<table>
+				<th colspan="2">修 改 个 人 信 息</th>
+				<tr>
+					<td>用户名：<span style="color:red">*</span></td>
+					<td><input type="text" name="username" class="ta" id="n1" value="{{ret.tenantName}}"></td>
+				</tr>
+				<tr>
+					<td>密码：<span style="color:red">*</span></td>
+					<td><input type="password" name="password1" class="ta" id="pwd1" value="{{ret.password}}"></td>
+				</tr>
+				<tr>
+					<td>确认密码：<span style="color:red">*</span></td>
+					<td><input type="password" name="password2" class="ta" id="pwd2" value="{{ret.password}}"></td>
+				</tr>
+				<tr>
+					<td>性别：<span style="color:red">*</span></td>
+					<td><label>男<input type="radio" value="1" name="sex" id="s1"></label><label>女<input type="radio" value="0" name="sex" id="s2"></label></td>
+				</tr>
+				<tr>
+					<td>年龄:<span style="color:red">*</span></td>
+					<td><select name="age" id="age">
+						<option value="18" id="a1">18</option>
+						<option value="19" id="a2">19</option>
+						<option value="20" id="a3">20</option>
+						<option value="21" id="a4">21</option>
+						<option value="22" id="a5">22</option>
+						<option value="23" id="a6">23</option>
+						<option value="24" id="a7">24</option>
+						<option value="25" id="a8">25</option>
+						<option value="26" id="a9">26</option>
+						<option value="27" id="a10">27</option>
+						<option value="28" id="a11">28</option>
+						<option value="29" id="a12">29</option>
+						<option value="30" id="a13">30</option>
+						<option value="31" id="a14">31</option>
+						<option value="32" id="a15">32</option>
+					<lect></td>
+				</tr>
+				<tr>
+					<td>手机号码:<span style="color:red">*</span></td>
+					<td><input type="text" class="ta" name="phone" id="phone" value="{{ret.phoneNumber}}"></td>
+				</tr>
+				<tr>
+					<td>职业:<span style="color:red">*</span></td>
+					<td><input type="text" class="ta" name="job" id="career" value="{{ret.job}}"></td>
+				</tr>
+				<tr>
+					<td>现居城市：<span style="color:red">*</span></td>
+					<td><select name="city" id="city">
+						<option value="beijing" id="c1">北京</option>
+						<option value="shanghai" id="c2">上海</option>
+						<option value="guangzhou" id="c3">广州</option>
+						<option value="shenzhen" id="c4">深圳</option>
+						<option value="hangzhou" id="c5">杭州</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td colspan="2" class="appen">（其它城市的梦想家还在建设中哦）</td>
+				</tr>
+				<tr>
+					<th colspan="2" style="height: 70px"><input type="submit" value="修改信息" id="submit"></th>
+				</tr>
+			</table>
+		</form>
+	</div>
+	{% if result %}
+		<script>alert("修改信息成功!");</script>
+	{% endif %}
+</body>
+</html>
+<script type="text/javascript">
+function check(){
+	var na = document.getElementById('n1');
+	var gz = /^[_0-9a-zA-Z]{7,20}$/;
+	var p1 = document.getElementById('pwd1');
+	var p2 = document.getElementById('pwd2');
+	var ph = document.getElementById('phone');
+	var ca = document.getElementById('career');
+	if (na.value.length == 0){
+		alert("用户名不能为空！");
+		return false;
+	}
+	else if (p1.value.length == 0){
+		alert("密码不能为空！");
+		return false;
+	}
+	else if (p1.value.length <= 6){
+		alert("密码长度太短！");
+		return false;
+	}
+	else if (!(p1.value == p2.value)){
+		alert("两次密码不一致！");
+		return false;
+	}
+	else if (ph.value.length == 0){
+		alert("手机号不能为空！");
+		return false;
+	}
+	else if (ca.value.length == 0){
+		alert("职业不能为空！");
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+function render(){
+	var male=document.getElementById('s1');
+	var female=document.getElementById('s2');
+	if ('1' == '{{ret.isMale}}')
+		male.checked=true;
+	else
+		female.checked=true;
+	
+	var city1=document.getElementById('c1');
+	var city2=document.getElementById('c2');
+	var city3=document.getElementById('c3');
+	var city4=document.getElementById('c4');
+	var city5=document.getElementById('c5');
+	if ('{{ret.city}}' == city1.value)
+		city1.selected="selected";
+	else if ('{{ret.city}}' == city2.value)
+		city2.selected="selected";
+	else if ('{{ret.city}}' == city3.value)
+		city3.selected="selected";
+	else if ('{{ret.city}}' == city4.value)
+		city4.selected="selected";
+	else
+		city5.selected="selected";
+
+	var age1=document.getElementById('a1');
+	var age2=document.getElementById('a2');
+	var age3=document.getElementById('a3');
+	var age4=document.getElementById('a4');
+	var age5=document.getElementById('a5');
+	var age6=document.getElementById('a6');
+	var age7=document.getElementById('a7');
+	var age8=document.getElementById('a8');
+	var age9=document.getElementById('a9');
+	var age10=document.getElementById('a10');
+	var age11=document.getElementById('a11');
+	var age12=document.getElementById('a12');
+	var age13=document.getElementById('a13');
+	var age14=document.getElementById('a14');
+	var age15=document.getElementById('a15');
+	if ('{{ret.age}}' == age1.value)
+		a1.selected="selected";
+	else if ('{{ret.age}}' == age2.value)
+		a2.selected="selected";
+	else if ('{{ret.age}}' == age3.value)
+		a3.selected="selected";
+	else if ('{{ret.age}}' == age4.value)
+		a4.selected="selected";
+	else if ('{{ret.age}}' == age5.value)
+		a5.selected="selected";
+	else if ('{{ret.age}}' == age6.value)
+		a6.selected="selected";
+	else if ('{{ret.age}}' == age7.value)
+		a7.selected="selected";
+	else if ('{{ret.age}}' == age8.value)
+		a8.selected="selected";
+	else if ('{{ret.age}}' == age9.value)
+		a9.selected="selected";
+	else if ('{{ret.age}}' == age10.value)
+		a10.selected="selected";
+	else if ('{{ret.age}}' == age11.value)
+		a11.selected="selected";
+	else if ('{{ret.age}}' == age12.value)
+		a12.selected="selected";
+	else if ('{{ret.age}}' == age13.value)
+		a13.selected="selected";
+	else if ('{{ret.age}}' == age14.value)
+		a14.selected="selected";
+	else
+		a15.selected="selected"
+}
+render();
+</script>

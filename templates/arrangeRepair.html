@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>处理报修</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        #box {
+            position: fixed;
+            background-color: cornflowerblue;
+            opacity: 0.8;
+            text-align: center;
+            font-size: medium;
+            top: 10%;
+            left: 0px;
+        }
+        .nav {
+		height: 60px;
+		background: rgba(0, 0, 0, 0.4);
+		text-align: right;
+        }
+        .nav > .button{
+            border: 0;
+            text-decoration: none;
+            color:#fff;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.60);
+            padding:0 15px;
+            float:right;
+            font-size: 16px;
+
+        }
+        .nav > .button:hover{
+            background: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body id="bg">
+    <div class="nav">
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('f_adminhome',userID=userID)}}" class="button">返回主页</a>
+	</div>
+<div class="container">
+    <br><br><br>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="jumbotron touming">
+                <h1>管理员您好！<br><br>欢迎来到<br><br>处理报修界面！<br><br></h1>
+                <p>每天都要有好心情哦&emsp;&emsp;\(￣︶￣*\))</p>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                {% if ret == False %}
+                <script>fun();</script>
+                {% endif %}
+                {% if repair | length == 0 %}
+                暂时没有待处理报修
+                {% else %}
+                <div id="box">
+                    工人师傅的ID<br><br>
+                    {% for man in repairman %}
+                    {{man.repairmanID}}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <br><br>
+
+{% for item in repair %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-1">
+                报修内容：{{item.content}}<br>
+                <form action="/arrange/{{item.tenantID}}/{{item.roomID}}" method="post">
+                    <input type="text" name="repairmanID" placeholder="待安排师傅ID">
+                    <input type="submit" value="处理报修">
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    
+</body>
+</html>
+<script>
+function fun(){
+    alert("安排失败，ID不存在!");
+}
+</script>
+<style>
+#bg {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #000000;
+    height: 608px;
+    background-image: url_for('static',filename='image/flying house.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    opacity:1.0;
+    margin: 0;
+    padding: 0;
+}
+.touming{
+    background-color:rgba(0,0,0,0)
+}
+</style>

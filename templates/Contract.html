@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<title>梦想家——合同</title>
+<style>
+	* {
+		margin:0;
+		padding:0;
+	}
+	body {
+		background: rgb(70, 116, 160,0.65) no-repeat scroll top center;
+		background-size: cover;
+	}
+		.nav {
+		height: 60px;
+		background: rgba(155,224,243,0.65);
+		text-align: right;
+	}
+	.nav > .button{
+		border: 0;
+		text-decoration: none;
+		color:#fff;
+		height: 60px;
+		line-height: 60px;
+		text-align: center;
+		background: rgba(66,181,213,0.65);
+		padding:0 15px;
+		float:right;
+		font-size: 16px;
+	}
+	.nav > .button:hover{
+		background: rgba(29,136,165,0.65);
+	}
+
+	.nav > .logo {
+		position:absolute;
+		left:40px;
+	}
+	#logo {
+		background-color: none;
+		width: 60px;
+		height: 60px;
+	}
+	#contract {
+		position:relative;
+		margin-top:5%;
+		margin-bottom:5%;
+		left:20%;
+		text-align:left;
+		text-justify:auto;
+		font-size:18px;
+		background: #fff;
+		color: #000000;;
+		opacity:0.6;
+		width:60%;
+		border-radius:15px;
+	}
+	
+	#cname {
+		position:relative;
+		padding-top:10px;
+		padding-left:5px;
+		text-align:center;
+		font-size:20px;
+	}
+	
+	#content {	
+		position:relative;
+		margin-left:30px;
+		margin-right:30px;
+	}
+	
+	#tail {
+		position:relative;
+		text-align:right;
+		bottom:10%;
+		padding-bottom:10px;
+	}
+	
+	#but {
+		position:fixed;
+		right:0;
+		bottom:10%;
+		alignment-adjust:central;
+		alignment-baseline:central;
+	}
+</style>
+
+</head>
+	
+<body>
+	<div class="nav">
+		<a href="{{url_for('userhome',userID=userID)}}" class="logo">
+				<img src="{{url_for('static',filename='image/logo-small.png')}}" alt="" id="logo">
+		</a>
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('changeinfo',userID=userID)}}" class="button">账号管理</a>
+		<a href="{{url_for('orderquery',userID=userID)}}" class="button">我的订单</a>
+		<a href="{{url_for('msgbox',userID=userID)}}" class="button">消息盒子</a>
+	</div>
+	<div id="contract">
+		<div id="cname">房屋租赁合同</div>
+        <br/>
+        <div id="content">
+            甲方（出租方）身份证号：
+            <br/>
+            乙方（承租方）身份证号：
+            <br/>
+            <br/>
+            <br/>
+            经甲、乙双方在平等、自愿、互利的基础上，友好协商，达成以下协议：
+            <br/>
+            一、租房地点：甲方同意把 ______的房屋租给乙方，并保证该房的合法出租性。
+            <br/>
+            二、房屋用途：乙方所租房屋仅为居家住宅使用；不得进行任何违法活动，否则后果自负。
+            <br/>
+            三、租期：自20__年__月__日起至20__年__月__日止。租赁期满，乙方应如期将房屋归回甲方。
+            <br/>
+            四、租金：每月_______元人民币，租房保证金______元人民币。
+            <br/>
+            五、付款方式：乙方每__个月支付一次，第一次租金及保证金在签定本合同时支付，以后租金按规定的付款期限提前___天将下期房款支付给甲方。若逾期10天未支付租金，甲方有权收回房屋，并在房屋保证金中扣除硬件租金。
+            <br/>
+            乙方自行承担在租赁期所产生的水、电、气、网络、物业管理等其它房屋使用费用。
+            六、租房保证金：存放于甲方作为履约保证金，不计利息，主要用于对合同终止时，甲方对乙方在租赁期内发生的基本费用：包括房租、房内物品损坏、短缺等扣除清算后一次性不计利息退回乙方。
+            <br/>
+            七、其它约定：
+            <br/>
+            &emsp;1、未经甲方同意，乙方不得私自把该房的部分或全部转租他人；
+            <br/>
+            &emsp;2、本合同终止时，需对甲方提供的设施进行清点、检查移交，如有损坏、短缺应照值或酌情赔偿；（电器有2个空调，1个全自动洗衣机）
+            <br/>
+            &emsp;3、乙方如因使用不当损坏房屋及设施的，应负责修复原状或予以经济赔偿。若水、电、煤气等使用不当或人为造成的人身伤亡和意外事故，与房东无关，后果自负。（乙方搬家临走前必须把卫生搞好，否则扣除卫生清理费300元）
+            <br/>
+            九、违约处理：如甲方提前终止合同，应按一个月租金向乙方支付违约金，并退回剩余房款及保证金；如乙方中途退房，须按一个月房租向甲方支付违约金，甲方退回剩余租金及保证金，否则，没收剩余房租金及保证金。如乙方租赁期已超过，乙方既不续签本合同也不退房，甲方对该房有权作出处理，后果由乙方自负。
+            <br/>
+            十、本合同未尽事宜，一律按《中华人民共和国合同法》的有关规定，经双方协商作了补充规定，补充规定与本合同具有同等法律效力。
+            <br/>
+            十一、如因洪水、地震、火灾、拆迁和法律法规政府政策变化等不可抗力原因，导致本协议不能全面履行，甲、乙双方互不承担违约责任。租金按实际租赁时间计算，多退少补。
+            <br/>
+            十二、本合同一式二份，甲、乙双方各执一份，每份均具有同等法律效力。
+            <br/>
+            <br/>
+            <br/>
+            <div id="tail">
+                甲方签名：&emsp;&emsp;&emsp;&emsp;乙方签名：&emsp;&emsp;&emsp;&emsp;
+                <br/>
+                电话号码：&emsp;&emsp;&emsp;&emsp;电话号码：&emsp;&emsp;&emsp;&emsp;
+                <br/>
+                <br/>
+                签约时间：&emsp;&emsp;年&emsp;&emsp;月&emsp;&emsp;日
+            </div>
+        </div>
+	</div>
+    <div id="but">
+    	<a href={{url_for('static',filename='contract.doc')}}>
+        <button type="button" class="btn btn-default" aria-label="Left Align">
+  			<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+		</button>
+        </a>
+    </div>
+</body>
+
+</html>

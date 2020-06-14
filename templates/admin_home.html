@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>管理员主页</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .fakeimg {
+            height: 200px;
+            background: #aaa;
+        }
+        .nav {
+		height: 60px;
+		background: rgba(0, 0, 0, 0.4);
+		text-align: right;
+        }
+        .nav > .button{
+            border: 0;
+            text-decoration: none;
+            color:#fff;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.60);
+            padding:0 15px;
+            float:right;
+            font-size: 16px;
+
+        }
+        .nav > .button:hover{
+            background: rgba(0, 0, 0, 0.8);
+        }
+        .btn {
+            background-color: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body id="bg">
+	<div class="nav">
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('f_adminhome',userID=userID)}}" class="button">返回主页</a>
+	</div>
+
+<div class="container">
+    <br><br><br>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="jumbotron touming">
+                <h1>欢迎登录管理系统”！<br><br></h1>
+                <p>每天都要有好心情哦&emsp;&emsp;\(￣︶￣*\))</p><br>
+                <p><a class="btn" href="#manage-trans" role="button">处理事务</a>&emsp;&emsp;
+                    <a class="btn" href="#manage-info" role="button">管理信息</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="container" id="manage-trans">
+    <br><br>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 处理事务</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <br><hr class="line-one"><br>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+            <a href="{{url_for('f_repairs')}}">
+                <button class="touming">
+                    <p><img src="{{url_for('static',filename='icon/报修.png')}}" width="100" height="100"></p>
+                    <p>处理报修&emsp;<span class="badge">{{repair | length}}</span></p>
+                </button>
+            </a>
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+            <a href="{{url_for('f_audit')}}">
+                <button>
+                    <p><img src="{{url_for('static',filename='icon/申请-灰色.png')}}" width="100" height="100"></p>
+                    <p>处理申请&emsp;<span class="badge">{{apply | length}}</span></p>
+                </button>
+            </a>
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+            <a href="{{url_for('f_reply')}}">
+                <button>
+                    <p><img src="{{url_for('static',filename='icon/投诉.png')}}" width="100" height="100"></p>
+                    <p>处理投诉&emsp;<span class="badge">{{complain | length}}</span></p>
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <br><hr class="line-one"><br>
+    </div>
+</div>
+
+<br><br><br>
+
+<div class="container" id="manage-info">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <h2><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 管理信息</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <br><hr class="line-one"><br>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2 col-md-offset-3">
+            <a href="{{url_for('f_managetenant')}}">
+                <button>
+                    <p><img src="{{url_for('static',filename='icon/租客.png')}}" width="100" height="100"></p>
+                    <p>管理租客</p>
+                </button>
+            </a>
+        </div>
+        <div class="col-md-2 col-md-offset-2">
+            <a href="{{url_for('f_manageworker')}}">
+            <button>
+                <p><img src="{{url_for('static',filename='icon/师傅.png')}}" width="100" height="100"></p>
+                <p>管理师傅</p>
+            </button>
+            </a>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="row">
+        <div class="col-md-2 col-md-offset-3">
+            <a href="{{url_for('f_managecontract')}}">
+            <button>
+                <p><img src="{{url_for('static',filename='icon/订单黑.png')}}" width="100" height="100"></p>
+                <p>管理合同</p>
+            </button>
+            </a>
+        </div>
+        <div class="col-md-2 col-md-offset-2">
+            <a href="{{url_for('f_manageroom')}}">
+            <button>
+                <p><img src="{{url_for('static',filename='icon/房源.png')}}" width="100" height="100"></p>
+                <p>管理房源</p>
+            </button>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <br><hr class="line-one"><br>
+    </div>
+</div>
+
+<div class="bs-docs-header" id="content" tabindex="-1">
+    <br><br>
+    <div class="container">
+        <h3 style="text-align:center">到底啦&emsp;&emsp;~(￣▽￣)~*</h3>
+    </div>
+</div>
+
+</body>
+</html>
+
+<style>
+    .line-one {/*透明渐变水平线*/
+        width:80%;
+        margin:0 auto;
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+
+    }
+    #bg {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: #000000;
+        height: 608px;
+        background-image: {{url_for('static',filename='image/flying house.png')}}
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        opacity: 1.0;
+        margin: 0;
+        padding: 0;
+    }
+    .touming{
+        background-color:rgba(0,0,0,0)
+    }
+</style>

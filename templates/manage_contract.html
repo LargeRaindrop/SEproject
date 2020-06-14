@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>管理合同</title>
+    <style>
+                .nav {
+		height: 60px;
+		background: rgba(0, 0, 0, 0.4);
+		text-align: right;
+        }
+        .nav > .button{
+            border: 0;
+            text-decoration: none;
+            color:#fff;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.60);
+            padding:0 15px;
+            float:right;
+            font-size: 16px;
+
+        }
+        .nav > .button:hover{
+            background: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+	<div class="nav">
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('f_adminhome',userID=userID)}}" class="button">返回主页</a>
+	</div>
+<div class="container">
+    <br><br><br>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="jumbotron touming">
+                <h1>管理员您好！<br><br>欢迎来到<br><br>合同管理界面！<br><br></h1>
+                <p>每天都要有好心情哦&emsp;&emsp;\(￣︶￣*\))</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-2">
+        {% if contract | length == 0 %}
+        暂时没有合同！
+        {% endif %}
+    </div>
+</div>
+
+    {% for item in contract %}
+        <div class="row">
+            <div class="col-md-2 col-md-offset-2">
+                合同ID：&emsp;&emsp;{{item.tenantID}}
+            </div>
+            <div class="col-md-2">
+                合同起始时间：&emsp;&emsp;{{item.startdate}}
+            </div>
+            <div class="col-md-2">
+                合同结束时间：&emsp;&emsp;{{item.enddate}}
+            </div>
+            <div class="col-md-2">
+                <form action="/managecontract/{{item.tenantID}}/{{item.roomID}}/{{item.serverID}}" method="post">
+                <input type="submit" value="删除合同">    
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+
+</body>
+</html>
+
+<style>
+    .touming{
+        background-color:rgba(0,0,0,0)
+    }
+</style>

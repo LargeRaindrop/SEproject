@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>梦想家——主页</title>
+	<style>
+	* {
+		margin:0;
+		padding:0;
+	}
+	body {
+		background: rgba(255,255,255,1) url("{{url_for('static', filename='image/flying house-30%.jpg')}}") no-repeat scroll top center;
+		background-size: cover;
+	}
+	div {
+		border: 0;
+		margin: 0;
+	}	
+	.nav {
+		height: 60px;
+		background: rgba(155,224,243,0.65);
+		text-align: right;
+	}
+	.nav > .button{
+		border: 0;
+		text-decoration: none;
+		color:#fff;
+		height: 60px;
+		line-height: 60px;
+		text-align: center;
+		background: rgba(66,181,213,0.65);
+		padding:0 15px;
+		float:right;
+		font-size: 16px;
+
+	}
+	.nav > .button:hover{
+		background: rgba(29,136,165,0.65);
+	}
+
+	.nav > .logo {
+		position:absolute;
+		left:40px;
+	}
+	#logo {
+		background-color: none;
+		width: 60px;
+		height: 60px;
+	}
+	.logo-big {
+		width: 400px;
+		margin:0 auto;
+	}
+	#logo-big {
+		height: 300px;
+		width: 400px;
+	}
+
+	.search {
+		width:100%;
+		height:570px;
+		
+	}
+	.middle {
+		position: absolute;
+		left: 50%;
+		margin-left:-321px;
+		width: 642px;
+		height: 104px;
+		top:50%;
+		margin-top: 20px;
+	}
+	.search .input {
+		width: 600px;
+		height: 40px;
+		background-color: #fff;
+		border:1px solid #1d88a5;
+		border-radius: 20px 0 0 20px;
+		position:absolute;
+		/*top:285px;
+		left:400px;*/
+	}
+
+	#search {
+		width: 42px;
+		height: 42px;
+		background-color: #1d88a5;
+		border-radius: 0 20px 20px 0;
+		position:absolute;
+		left:600px;
+	}
+
+	#searchIcon {
+		width: 25px;
+		height: 25px;
+		padding: 8px 6px;
+	}
+
+	label{
+		color:#1d839f;
+	}
+
+	label,#shortRent,#longRent {
+		position:relative;
+		top:80px;
+		left:260px;
+	}
+
+	</style>
+</head>
+<body>
+	<div class="nav">
+		<a href="{{url_for('userhome',userID=userID)}}" class="logo">
+				<img src="{{url_for('static',filename='image/logo-small.png')}}" alt="" id="logo">
+		</a>
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('changeinfo',userID=userID)}}" class="button">账号管理</a>
+		<a href="{{url_for('orderquery',userID=userID)}}" class="button">我的订单</a>
+		<a href="{{url_for('msgbox',userID=userID)}}" class="button">消息盒子</a>
+	</div>
+	<div class="search">
+		<div class="logo-big">
+			<img src="{{url_for('static', filename='image/logo.png')}}" alt=""  id="logo-big">
+		</div>
+		<div class="middle">
+		<form action="{{url_for('f_search',userID=userID)}}" method="post">
+			<input type="text" class="input" name="keyword" placeholder="请输入关键字查找房源">
+			<input type="radio" value="short" name="rentTime" id="shortRent" checked="checked">
+			<label for="shortRent">短租</label>
+			<input type="radio" value="long" name="rentTime" id="longRent">
+			<label for="longRent">长租</label>
+			<input type="image" src="{{url_for('static',filename='icon/搜.png')}}" id="search" onclick="document.formName.submit()">
+		</form>	
+		</div>	
+	</div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>    <title>管理房源</title>
+    <style>
+                .nav {
+		height: 60px;
+		background: rgba(0, 0, 0, 0.4);
+		text-align: right;
+        }
+        .nav > .button{
+            border: 0;
+            text-decoration: none;
+            color:#fff;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.60);
+            padding:0 15px;
+            float:right;
+            font-size: 16px;
+
+        }
+        .nav > .button:hover{
+            background: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+		<a href="{{url_for('f_adminhome',userID=userID)}}" class="button">返回主页</a>
+	</div>
+<div class="container">
+    <br><br><br>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="jumbotron touming">
+                <h1>管理员您好！<br><br>欢迎来到<br><br>房源管理界面！<br><br></h1>
+                <p>每天都要有好心情哦&emsp;&emsp;\(￣︶￣*\))</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br>
+
+    {% for item in room %}
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+            {{item.roomName}}
+        </div>
+        <div class="col-md-2">
+            ￥{{item.rentmoney}}
+        </div>
+        <div class="col-md-2">
+            {{item.capacity}}人/间
+        </div>
+        <div class="col-md-2">
+            {{item.description}}
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <form action="/manageroom/{{serverID}}/{{item.roomID}}" method="post">
+            <div class="col-md-1 col-md-offset-2">
+                <input type="text" class="form-control" name="tenantID" placeholder="租客ID">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" name="content" value="管理员现场出租">
+            </div>
+            <div class="col-md-2">
+                <input type="date" class="form-control" name="startdate" placeholder="起始时间">
+            </div>
+            <div class="col-md-2">
+                <input type="date" class="form-control" name="enddate" placeholder="结束时间">
+            </div>
+            <div class="col-md-1">
+                <input type="submit" class="btn btn-success" value="提交" id="submit">
+            </div>
+        </form>
+    </div>
+    <br><br>
+    {% endfor %}
+</body>
+</html>
+
+<style>
+    .touming{
+        background-color:rgba(0,0,0,0)
+    }
+</style>

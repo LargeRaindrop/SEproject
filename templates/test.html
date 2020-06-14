@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/arrange/{{r}}" method="post">
+        <input type="text" name="repairmanID">
+        <input type="submit" value="处理报修">
+    </form>
+</body>
+</html>
+
+
+@app.route('/arrange/<ret>', methods=['GET', 'POST'])
+    def f_arrange(ret):
+        if request.method == 'POST':
+            ret=gnerrepairorder(TenantID,roomID,request.form['repairmanID'])
+            return redirect(url_for('f',))

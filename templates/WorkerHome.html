@@ -1,0 +1,78 @@
+<!doctype html>
+<meta charset="utf-8" />
+<html>
+<head>
+	<title>师傅主页</title>
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style>
+		        .nav {
+		height: 60px;
+		background: rgba(0, 0, 0, 0.4);
+		text-align: right;
+        }
+        .nav > .button{
+            border: 0;
+            text-decoration: none;
+            color:#fff;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.60);
+            padding:0 15px;
+            float:right;
+            font-size: 16px;
+
+        }
+        .nav > .button:hover{
+            background: rgba(0, 0, 0, 0.8);
+        }
+	</style>
+</head>
+<body id="bg">
+	<div class="nav">
+		<a href="{{url_for('home')}}" class="button">注 销</a>
+	</div>
+	<div>待处理工单</div>
+	{% for item in order %}
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				租客ID：{{item.tenantID}}&emsp;&emsp;房间ID：{{item.roomID}}&emsp;&emsp;报修内容：{{item.content}}
+			</div>
+			<div class="col-md-4">
+				<form action="/workerhome/{{item.repairmanID}}/{{item.tenantID}}/{{item.roomID}}" method="post" onsubmit="fun()">                  
+					<button type="button" class="btn btn-success">
+						<input type="submit" value="处理">
+					</button>
+                </form>
+			</div>
+		</div>
+	{% endfor %}
+</body>
+</html>
+
+<script>
+function fun(){
+	alert('处理成功！');
+}
+</script>
+
+<style>
+#bg {
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: center;
+	color: #000000;
+	height: 608px;
+	background-image: url_for('static',filename='image/flying house.png');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+	opacity:1.0;
+	margin: 0;
+	padding: 0;
+}
+</style>
